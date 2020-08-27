@@ -13,8 +13,21 @@ public:
 	vector<vector<int> > Searcher ;//分類
     vector<vector<int> > Good ;//分類
 };
+void random_zero_or_one(vector<vector<int> > &P)
+{
+    int a=P.size();
+    int b=P[0].size();
+    for(int i=0;i<a;i++)
+    {
+        for(int j=0;j<b;j++)
+        {
+            int ran=rand()%2;
+            P[i][j]=ran;
+        }
+    }
+}
 int main(int argc, const char * argv[]) {
-     srand((unsigned int)time(NULL));
+    srand((unsigned int)time(NULL));
     int ITE = atoi(argv[1]);//iteration
     int run = atoi(argv[2]);
     int Bit = atoi(argv[3]);
@@ -27,6 +40,16 @@ int main(int argc, const char * argv[]) {
     cout<<SE_ini.Searcher[0].size()<<' '<<endl;
     cout<<SE_ini.Good.size()<<' '<<endl;
     cout<<SE_ini.Good[0].size()<<' '<<endl;
+    random_zero_or_one(SE_ini.Searcher);
+    random_zero_or_one(SE_ini.Good);
+    // for(int i=0;i<SE_ini.Good.size();i++)
+    // {
+    //     for(int j=0;j<SE_ini.Good[0].size();j++)
+    //     {
+    //         cout<<SE_ini.Good[i][j]<<' ';
+    //     }
+    //     cout<<endl;
+    // }
 
 
 }
