@@ -71,6 +71,23 @@ void crossover(vector<vector<int> > &P,vector<vector<int> > P1,vector<vector<int
 void Goods_update(vector<vector<int> >goods,vector<vector<int> >sampleV)
 {
     vector<int> fitness(sampleV.size(),0);
+    for(int i=0;i<sampleV.size();i++)
+    {
+        for(int j=0;j<sampleV[0].size();j++)
+        {
+            if(sampleV[i][j]==1)
+                fitness[i]++;
+        }
+    }
+}
+void Region(vector<vector<int> >P,int Quan)
+{
+    int i=0;
+    int j=0;
+    while(i < Quan)
+    {
+        P[i][j]=j;
+    }
 }
 int main(int argc, const char * argv[]) {
     srand((unsigned int)time(NULL));
@@ -86,22 +103,16 @@ int main(int argc, const char * argv[]) {
    
     random_zero_or_one(SE_ini.Searcher);
     random_zero_or_one(SE_ini.Good);
-    // for(int i=0;i<SE_ini.Good.size();i++)
+
+    crossover(SE_ini.SampleV,SE_ini.Searcher,SE_ini.Good,SE_Quan,(SE_Quan*Good_Quan),Bit);
+    Goods_update(SE_ini.Good,SE_ini.SampleV);
+    // for(int i=0;i<SE_Quan*SE_Quan*Good_Quan;i++)
     // {
-    //     for(int j=0;j<SE_ini.Good[0].size();j++)
+    //     cout<<i<<"   :  ";
+    //     for(int j=0;j<Bit;j++)
     //     {
-    //         cout<<SE_ini.Good[i][j]<<' ';
+    //         cout<<SE_ini.SampleV[i][j]<<' ';
     //     }
     //     cout<<endl;
     // }
-    crossover(SE_ini.SampleV,SE_ini.Searcher,SE_ini.Good,SE_Quan,(SE_Quan*Good_Quan),Bit);
-    for(int i=0;i<SE_Quan*SE_Quan*Good_Quan;i++)
-    {
-        cout<<i<<"   :  ";
-        for(int j=0;j<Bit;j++)
-        {
-            cout<<SE_ini.SampleV[i][j]<<' ';
-        }
-        cout<<endl;
-    }
 }
