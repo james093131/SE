@@ -68,6 +68,10 @@ void crossover(vector<vector<int> > &P,vector<vector<int> > P1,vector<vector<int
         i++;
     }
 }
+void Goods_update(vector<vector<int> >goods,vector<vector<int> >sampleV)
+{
+    vector<int> fitness(sampleV.size(),0);
+}
 int main(int argc, const char * argv[]) {
     srand((unsigned int)time(NULL));
     int ITE = atoi(argv[1]);//iteration
