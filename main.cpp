@@ -39,6 +39,7 @@ void mutation(vector<int> &P,int ind)//隨機選取一點做調換
 void crossover(vector<vector<int> > &P,vector<vector<int> > P1,vector<vector<int> > P2,int P1pop,int P2pop,int ind)
 {
     int i=0;
+    int y=0;
     while(i<P1pop){
 
         for(int j=0;j<P2pop;j++)
@@ -49,17 +50,19 @@ void crossover(vector<vector<int> > &P,vector<vector<int> > P1,vector<vector<int
            
                 if(k>c1)
                 {
-                    P[i*j+j][k]=P2[i][k];
+                    P[y][k]=P2[j][k];
                 } 
                 else{
-                    P[i*j+j][k]=P1[i][k]; 
+                    P[y][k]=P1[i][k]; 
                 }
             }
-            // float x = (float) rand() / (RAND_MAX + 1.0);
-            // if(x<MR)
-            // {
-            //     mutation(P[i],ind);
-            // }
+            float x = (float) rand() / (RAND_MAX + 1.0);
+            if(x<MR)
+            {
+                mutation(P[y],ind);
+            }
+            y++;
+          
             
         }
         i++;
@@ -76,9 +79,7 @@ int main(int argc, const char * argv[]) {
     SE_ini.Searcher.resize(SE_Quan,vector<int>(Bit));//幾個searcher and length is bits
     SE_ini.Good.resize(SE_Quan*Good_Quan,vector<int>(Bit));
     SE_ini.SampleV.resize(SE_Quan*SE_Quan*Good_Quan,vector<int>(Bit));
-    
-    cout<<SE_ini.SampleV.size()<<' '<<endl;
-    cout<<SE_ini.SampleV[0].size()<<' '<<endl;
+   
     random_zero_or_one(SE_ini.Searcher);
     random_zero_or_one(SE_ini.Good);
     // for(int i=0;i<SE_ini.Good.size();i++)
@@ -89,6 +90,14 @@ int main(int argc, const char * argv[]) {
     //     }
     //     cout<<endl;
     // }
-
-
+    crossover(SE_ini.SampleV,SE_ini.Searcher,SE_ini.Good,SE_Quan,(SE_Quan*Good_Quan),Bit);
+    for(int i=0;i<SE_Quan*SE_Quan*Good_Quan;i++)
+    {
+        cout<<i<<"   :  ";
+        for(int j=0;j<Bit;j++)
+        {
+            cout<<SE_ini.SampleV[i][j]<<' ';
+        }
+        cout<<endl;
+    }
 }
