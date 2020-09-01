@@ -107,6 +107,10 @@ vector<int> Fitness_Calculate(vector<vector<int> > &goods,vector<vector<int> >sa
     
     return fitness;
 }
+int Region_Check(vector<vector<int> >sampleV,int which,int Region)
+{
+
+}
 vector<double> Region_fitness(vector<vector<int> > &goods,vector<vector<int> >sampleV,vector<int> Sample_Fitness,vector<vector<int> >&Region_Fitness,int region)
 {
     int i=0;
@@ -161,6 +165,7 @@ int  CUT_Region(vector<vector<int> >&P,int Quan,int pop)
         test=test/2;
         len++;
     }
+    vector<int>Region_Cut(Quan);
     for(int j=0;j<pop;j++)
     {
         for(int i=0;i<len;i++)
@@ -327,9 +332,8 @@ void Marketing_Research(vector <vector<int> > &Searcher,vector<double> Expected_
         }
     }
 }
-vector<int> Find_Best_Searcher(vector<vector<int> >Searcher,int &BestOne_Fitness)
+void Find_Best_Searcher(vector<vector<int> >Searcher,int &BestOne_Fitness,vector<int> &Best_Searcher)
 {
-    vector<int> Best_Searcher(Searcher[0].size());
     vector<int> Fitness(Searcher.size());
     int BestOne_ind;
     int BestOne=-100;
@@ -346,12 +350,14 @@ vector<int> Find_Best_Searcher(vector<vector<int> >Searcher,int &BestOne_Fitness
             BestOne_ind=i;
         }
     }
-    BestOne_Fitness=BestOne;
-    for(int i=0;i<Searcher[0].size();i++)
+    if(BestOne > BestOne_Fitness)
     {
-        Best_Searcher[i]=Searcher[BestOne_ind][i];
+        BestOne_Fitness=BestOne;
+        for(int i=0;i<Searcher[0].size();i++)
+        {
+            Best_Searcher[i]=Searcher[BestOne_ind][i];
+        }
     }
-    return Best_Searcher;
 }
 int main(int argc, const char * argv[]) {
     
@@ -395,6 +401,9 @@ int main(int argc, const char * argv[]) {
     Region_len  = CUT_Region(SE_ini.Searcher,Region,Region*Searcher_Quan);
     //Region cut finish
 
+    int iter=0;
+    while(iter<ITE)
+    {   
     crossover(SE_ini.SampleV,SE_ini.Searcher,SE_ini.Good,Region*Searcher_Quan,(Region*Good_Quan),Bit,Region_len);//crossover完成，儲存到sampleV
     SE_ini.SampleV_Fitness = Fitness_Calculate(SE_ini.Good,SE_ini.SampleV,Region);
     //SampleV finish(crossover + mutation)
@@ -440,15 +449,18 @@ int main(int argc, const char * argv[]) {
         }
         cout<<endl;
     }
-    // for(int i=0;i<SE_ini.Good.size();i++)
-    // {
-    //     for(int j=0;j<SE_ini.Good[0].size();j++)
-    //     {
-    //         cout<<SE_ini.Good[i][j]<<' ';
-    //     }
-    //     cout<<endl;
-    // }
+    cout<<"SampleV"<<endl;
+    for(int i=0;i<SE_ini.SampleV.size();i++)
+    {
+        for(int j=0;j<SE_ini.SampleV[0].size();j++)
+        {
+            cout<<SE_ini.SampleV[i][j]<<' ';
+        }
+        cout<<endl;
+    }
     Marketing_Research(SE_ini.Searcher,CLC_Expected_Value.Expected_FitnessValue,SE_ini.Good,SE_ini.T_Visit,SE_ini.T_Not_Visit);
-    FIN_INF.Best_Searcher =Find_Best_Searcher(SE_ini.Searcher,FIN_INF.Best_Searcher_Fitness);
+    Find_Best_Searcher(SE_ini.Searcher,FIN_INF.Best_Searcher_Fitness,FIN_INF.Best_Searcher);
     cout<<FIN_INF.Best_Searcher_Fitness<<endl;
+    iter++;
+    }
 }
