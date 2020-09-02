@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include<stdlib.h>
 #include<iostream>
@@ -34,6 +35,11 @@ class Vision_Search{
         vector<double >Visit_Or_Not;
         vector<double >Expected_FitnessValue;
         int Fitness_Sum;
+};
+class RUN{
+    public:
+        vector<int> AVG_Iter_Searcher_Fitness;
+        int AVG_Best_Search_Fitness;
 };
 void random_zero_or_one(vector<vector<int> > &P)//隨機起始01
 {
@@ -112,12 +118,25 @@ int  CUT_Region(vector<vector<int> >&P,int Quan,int pop,int Each_Region_Quantity
     }
    return len;
 }
-void InformationOutput(int run,int bit,int region,int searcher,int sample,int Evaluation)
+void AVG(vector<int> &P,int len){
+    for(int i=0;i<P.size();i++)
+    {
+        P[i]=P[i]/len;
+    }
+}
+void InformationOutput(int run,int bit,int region,int searcher,int sample,int Evaluation,int AVG_Fitness,vector<int> &Avg_Iter_Fitness)
 {
-    cout<<"number of runs : "<<run<<endl;
-    cout<<"number of Evaluation : "<<Evaluation<<endl;
-    cout<<"number of Bit : "<<bit<<endl;
-    cout<<"number of regions : "<<region<<endl;
-    cout<<"number of Searcher : "<<searcher<<endl;
-    cout<<"number of Sample : "<<sample<<endl;
+    fstream file;
+    file.open("SE.txt",ios::app);
+    file<<"number of runs : "<<run<<endl;
+    file<<"number of Evaluation : "<<Evaluation<<endl;
+    file<<"number of Bit : "<<bit<<endl;
+    file<<"number of regions : "<<region<<endl;
+    file<<"number of Searcher : "<<searcher<<endl;
+    file<<"number of Sample : "<<sample<<endl;
+    file<<"Average Fitness : "<<AVG_Fitness<<endl;
+    for(int i=0;i<Avg_Iter_Fitness.size();i++)
+    {
+        file<<i+1<<' '<<Avg_Iter_Fitness[i]<<endl;
+    }
 }

@@ -9,10 +9,8 @@ int main(int argc, const char * argv[]) {
     int Region = atoi(argv[4]);//how many regions
     int Searcher_Quan = atoi(argv[5]);//goods quantity(each region )
     int Good_Quan = atoi(argv[6]);//searcher qunatity(each reigon)
-    InformationOutput(run,Bit,Region,Searcher_Quan*Region,Good_Quan*Region,ITE*Region*Searcher_Quan*Good_Quan);
     //input finish
-
-
+   
     SE_Init SE_ini;
     SE_ini.Searcher.resize(Region*Searcher_Quan,vector<int>(Bit));//幾個searcher and length is bits
     SE_ini.Good.resize( Region*Good_Quan ,vector<int>(Bit));//幾個Good and length is bits 
@@ -34,7 +32,9 @@ int main(int argc, const char * argv[]) {
     FIN_INF.Best_Searcher.resize(Bit);
     //Final information initial
 
-    FIN_INF.Best_Searcher_Fitness=0;
+    RUN Runresult;
+    Runresult.AVG_Iter_Searcher_Fitness.resize(ITE);
+
     random_zero_or_one(SE_ini.Searcher);
     random_zero_or_one(SE_ini.Good);
     //Searcher and Good random start finish
@@ -112,8 +112,14 @@ int main(int argc, const char * argv[]) {
     Marketing_Research(SE_ini.Searcher,CLC_Expected_Value.Expected_FitnessValue,SE_ini.Good,SE_ini.T_Visit,SE_ini.T_Not_Visit);
     Find_Best_Searcher(SE_ini.Searcher,FIN_INF.Best_Searcher_Fitness,FIN_INF.Best_Searcher);
     cout<<"Iteration"<<iter<<": "<<FIN_INF.Best_Searcher_Fitness<<endl;
+    Runresult.AVG_Iter_Searcher_Fitness[iter]+=FIN_INF.Best_Searcher_Fitness;
     iter++;
     }
-
+    
+    
+    Runresult.AVG_Best_Search_Fitness += FIN_INF.Best_Searcher_Fitness;
+    Runresult.AVG_Best_Search_Fitness= Runresult.AVG_Best_Search_Fitness/run;
+    AVG(Runresult.AVG_Iter_Searcher_Fitness,run);
+    InformationOutput(run,Bit,Region,Searcher_Quan*Region,Good_Quan*Region,ITE*Region*Searcher_Quan*Good_Quan,Runresult.AVG_Best_Search_Fitness,Runresult.AVG_Iter_Searcher_Fitness);
 
 }
