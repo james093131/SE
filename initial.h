@@ -9,6 +9,7 @@
 #include<vector>
 #define MR 0.15
 using namespace std;
+
 class Final {
     public:
     vector<int> Best_Searcher;
@@ -110,4 +111,13 @@ int  CUT_Region(vector<vector<int> >&P,int Quan,int pop,int Each_Region_Quantity
         }
     }
    return len;
+}
+void InformationOutput(int run,int bit,int region,int searcher,int sample,int Evaluation)
+{
+    cout<<"number of runs : "<<run<<endl;
+    cout<<"number of Evaluation : "<<Evaluation<<endl;
+    cout<<"number of Bit : "<<bit<<endl;
+    cout<<"number of regions : "<<region<<endl;
+    cout<<"number of Searcher : "<<searcher<<endl;
+    cout<<"number of Sample : "<<sample<<endl;
 }
