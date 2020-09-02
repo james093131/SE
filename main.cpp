@@ -111,7 +111,7 @@ int main(int argc, const char * argv[]) {
     // }
     Marketing_Research(SE_ini.Searcher,CLC_Expected_Value.Expected_FitnessValue,SE_ini.Good,SE_ini.T_Visit,SE_ini.T_Not_Visit);
     Find_Best_Searcher(SE_ini.Searcher,FIN_INF.Best_Searcher_Fitness,FIN_INF.Best_Searcher);
-    cout<<"Iteration"<<iter<<": "<<FIN_INF.Best_Searcher_Fitness<<endl;
+    cout<<"Iteration"<<iter+1<<": "<<FIN_INF.Best_Searcher_Fitness<<endl;
     iter++;
     }
 }
