@@ -123,16 +123,17 @@ void AVG(vector<int> &P,int len){
         P[i]=P[i]/len;
     }
 }
-void InformationOutput(int run,int bit,int region,int searcher,int sample,int Evaluation,int &AVG_Fitness,vector<int> Avg_Iter_Fitness)
+void InformationOutput(int run,int bit,int region,int searcher,int sample,int Evaluation,int &AVG_Fitness,vector<int> Avg_Iter_Fitness,double START,double END)
 {
     fstream file;
     file.open("SE.txt",ios::out);
     file<<"number of runs : "<<run<<endl;
     file<<"number of Evaluation : "<<Evaluation<<endl;
     file<<"number of Bit : "<<bit<<endl;
-    file<<"number of regions : "<<region<<endl;
+    file<<"number of Regions : "<<region<<endl;
     file<<"number of Searcher : "<<searcher<<endl;
     file<<"number of Sample : "<<sample<<endl;
+    file<<"Execution Time :"<<(END - START) / CLOCKS_PER_SEC<<"(s)"<<endl;
     file<<"Average Fitness : "<<AVG_Fitness<<endl;
     for(int i=0;i<Avg_Iter_Fitness.size();i++)
     {
