@@ -14,7 +14,6 @@ using namespace std;
 class Final {
     public:
     vector<int> Best_Searcher;
-    
     int Best_Searcher_Fitness;
 };
 class SE_Init { 
@@ -124,10 +123,10 @@ void AVG(vector<int> &P,int len){
         P[i]=P[i]/len;
     }
 }
-void InformationOutput(int run,int bit,int region,int searcher,int sample,int Evaluation,int AVG_Fitness,vector<int> &Avg_Iter_Fitness)
+void InformationOutput(int run,int bit,int region,int searcher,int sample,int Evaluation,int &AVG_Fitness,vector<int> Avg_Iter_Fitness)
 {
     fstream file;
-    file.open("SE.txt",ios::app);
+    file.open("SE.txt",ios::out);
     file<<"number of runs : "<<run<<endl;
     file<<"number of Evaluation : "<<Evaluation<<endl;
     file<<"number of Bit : "<<bit<<endl;

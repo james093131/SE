@@ -34,6 +34,7 @@ int main(int argc, const char * argv[]) {
 
     RUN Runresult;
     Runresult.AVG_Iter_Searcher_Fitness.resize(ITE);
+    Runresult.AVG_Best_Search_Fitness=0;
 
     random_zero_or_one(SE_ini.Searcher);
     random_zero_or_one(SE_ini.Good);
@@ -115,11 +116,9 @@ int main(int argc, const char * argv[]) {
     Runresult.AVG_Iter_Searcher_Fitness[iter]+=FIN_INF.Best_Searcher_Fitness;
     iter++;
     }
-    
-    
     Runresult.AVG_Best_Search_Fitness += FIN_INF.Best_Searcher_Fitness;
-    Runresult.AVG_Best_Search_Fitness= Runresult.AVG_Best_Search_Fitness/run;
     AVG(Runresult.AVG_Iter_Searcher_Fitness,run);
+    Runresult.AVG_Best_Search_Fitness = Runresult.AVG_Best_Search_Fitness/run;
     InformationOutput(run,Bit,Region,Searcher_Quan*Region,Good_Quan*Region,ITE*Region*Searcher_Quan*Good_Quan,Runresult.AVG_Best_Search_Fitness,Runresult.AVG_Iter_Searcher_Fitness);
 
 }
