@@ -41,18 +41,15 @@ int main(int argc, const char * argv[]) {
     START=clock();
     while(r<run)
     {
-    FIN_INF.Best_Searcher_Fitness=0;
-    random_zero_or_one(SE_ini.Searcher);
-    random_zero_or_one(SE_ini.Good);
-    //Searcher and Good random start finish
-    
-    int Region_len = CUT_Region(SE_ini.Good,Region,Region*Good_Quan,Good_Quan);
-    Region_len  = CUT_Region(SE_ini.Searcher,Region,Region*Searcher_Quan,Searcher_Quan);
-    //Region cut finish
-    
-    
+        FIN_INF.Best_Searcher_Fitness=0;
+        random_zero_or_one(SE_ini.Searcher);
+        random_zero_or_one(SE_ini.Good);
+        //Searcher and Good random start finish
+        
+        int Region_len = CUT_Region(SE_ini.Good,Region,Region*Good_Quan,Good_Quan);
+        Region_len  = CUT_Region(SE_ini.Searcher,Region,Region*Searcher_Quan,Searcher_Quan);
+        //Region cut finish
 
-    
         int iter=0;
         while(iter<ITE)
         {   

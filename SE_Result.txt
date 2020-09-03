@@ -1,0 +1,23 @@
+1.將Searcher和Sample隨機01初始化
+
+2.讀取欲切割成幾個區域，依照所切區域的數量進行切割(ex 4區 00 01 10 11)
+
+3.SE運用Searcher和Sample 一一進行crossover和mutation後，產生出SampleV
+
+4.再進行Evaluation後選取各個Region較佳的SampleV變為Sample
+
+5.Vision Search 
+計算各Region的Expexted Value
+5.1 未造訪/造訪數，（越久沒投資的區域此項會越大）增加多樣性
+5.2 該Region所有的SampleV的值加總／SampleV的總數 （代表著Region的投資潛力） 有群體智慧的感覺
+5.3 該區最好的Ｓample的Fitness／所有sample Fitness的總和  單體智慧的感覺
+
+6. Marketing Research
+6.1利用Player的機制（此次程式以3 Player的方式來做進行）選出Expected Value最高的Region,然後將該區最好的Sample賦值給Searcher
+6.2更新3所用到的造訪數及未造訪數
+
+7.輸出當前Iteration最佳的Searcher Fitness
+
+8.重複3－7直到迴圈結束
+
+
