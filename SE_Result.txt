@@ -1,6 +1,15 @@
+此次實作，使用者可自行輸入iteration,run,bit（求解的長度）,region(切成幾區),Searcher_Quan(每區中有幾個Searcher),Good_Quan(每區中有幾個Sample)
+
+此次實作
+求解1000bits 在Mutation rate為0.2的情況下大約需要130000個Evaluation(2000(iteration)*4(Searcher的數量)*16(Sample的數量))才能求解出1000
+如果將Mutation rate設得更高的情況下，會使得收斂加快，求解出1000的速度變快
+在Mutation rate為0.8的情況下大約需要45000個Evaluation(700(iteration)*4(Searcher的數量)*16(Sample的數量))即能求解出1000
+
+更多的詳細實驗結果可參考SE_Analysis.pdf
+
 1.將Searcher和Sample隨機01初始化
 
-2.讀取欲切割成幾個區域，依照所切區域的數量進行切割(ex 4區 00 01 10 11)
+2.讀取欲切割成幾個區域，依照所切區域的數量進行切割(ex. 4區 00 01 10 11)
 
 3.SE運用Searcher和Sample 一一進行crossover和mutation後，產生出SampleV
 

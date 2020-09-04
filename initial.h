@@ -8,7 +8,7 @@
 #include<time.h>
 #include<math.h>
 #include<vector>
-#define MR 0.15
+#define MR 0.65
 using namespace std;
 
 class Final {//儲存當前ＩＴＥＲ最好的那組解

@@ -1,20 +1,28 @@
 #include "Vision_Search.h"
-void Marketing_Research_Visit_Choice(vector<int>&Which_Region,vector<int>&Visit_Time,int size,vector<double> Expected_Value)
+void Marketing_Research_Visit_Choice(vector<int>&Which_Region,vector<int>&Visit_Time,int size,vector<double> Expected_Value,int region)
 {
     int i=0;
     while(i< size)
     {
-        int c1=rand()%Expected_Value.size();
-        int c2=rand()%Expected_Value.size();
-        int c3=rand()%Expected_Value.size();
-        while(c1==c2)
+        int c1=rand()%region;
+        int c2=rand()%region;
+        int c3=rand()%region;
+        if(region >1)
         {
-            c2=rand()%Expected_Value.size();
+             while(c1==c2)
+            {
+                c2=rand()%region;
+            }
         }
-        while(c3==c2 || c3==c1)
+       
+        if(region > 3)
         {
-            c3=rand()%Expected_Value.size();
-        }       
+            while(c3==c2 || c3==c1)
+            {
+                c3=rand()%region;
+            }  
+        }
+            
         if(Expected_Value[c1] > Expected_Value[c2])
         {
             if(Expected_Value[c1] >Expected_Value[c3])
@@ -42,22 +50,23 @@ void Marketing_Research_Visit_Choice(vector<int>&Which_Region,vector<int>&Visit_
         i++;
     }
 }
-void Marketing_Research(vector <vector<int> > &Searcher,vector<double> Expected_Value,vector<vector<int> > good,vector<int> &T_Visit,vector<int> &T_Not_Visit)
+void Marketing_Research(vector <vector<int> > &Searcher,vector<double> Expected_Value,vector<vector<int> > good,vector<int> &T_Visit,vector<int> &T_Not_Visit,int region)
 {
     
-    vector<int> Which_Region(Searcher.size());
-    vector<int> Visit_Time(Expected_Value.size(),0);
-    Marketing_Research_Visit_Choice(Which_Region,Visit_Time,Searcher.size(),Expected_Value);
+    vector<int> Which_Region(Searcher.size());//Searcher要拿哪個Region
+    vector<int> Visit_Time(region,0);
+    Marketing_Research_Visit_Choice(Which_Region,Visit_Time,Searcher.size(),Expected_Value,region);
     for(int i=0;i<Searcher.size();i++)
     {
-        int ind=Which_Region[i]*4;
+        // cout<<Which_Region[i]<<endl;
+        int ind=Which_Region[i]*good.size()/region;
         // cout<<ind<<endl;
         for(int j=0;j<Searcher[0].size();j++)
         {
             Searcher[i][j]=good[ind][j];
         }
     }
-    for(int i=0;i<Visit_Time.size();i++)
+    for(int i=0;i<Visit_Time.size();i++)//更新Visit or not Visit
     {
         if(Visit_Time[i]==0)
         {
