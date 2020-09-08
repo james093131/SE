@@ -1,0 +1,9 @@
+Complier
+g++ -o SE main.cpp
+
+Exuction 
+
+./SE iteration run length Region searcher Sample
+
+Example
+./SE 1000 30 1000 4 1 2

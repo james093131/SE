@@ -82,7 +82,7 @@ int main(int argc, const char * argv[]) {
         //     cout<<CLC_Expected_Value.Visit_Or_Not[i]<<' ';
         // }
         // cout<<endl;
-        Vision_Search_Expected_Value_2(CLC_Expected_Value.SampleV_Region_Fitness,SE_ini.SampleV.size());
+        Vision_Search_Expected_Value_2(CLC_Expected_Value.SampleV_Region_Fitness,SE_ini.SampleV.size()/Region);
         // for(int i=0;i<CLC_Expected_Value.SampleV_Region_Fitness.size();i++)
         // {
         //     cout<<CLC_Expected_Value.SampleV_Region_Fitness[i]<<' ';
